@@ -7,26 +7,6 @@ sys.path.append('../qs-testes-truco-25-2')
 from truco.carta import Carta
 from truco.pontos import MANILHA, CARTAS_VALORES, ENVIDO
 
-@pytest.fixture
-def espadao():
-    return Carta(1, "ESPADAS")
-
-@pytest.fixture
-def bastiao():
-    return Carta(1, "BASTOS")
-
-@pytest.fixture
-def carta_alta_ouro():
-    return Carta(3, "OUROS")
-
-@pytest.fixture
-def carta_baixa_ouro():
-    return Carta(4, "OUROS")
-
-@pytest.fixture
-def carta_baixa_copas():
-    return Carta(4, "COPAS")
-
 
 def test__init__():
     """Testando se método __init__ de Carta cria corretamente a instância"""

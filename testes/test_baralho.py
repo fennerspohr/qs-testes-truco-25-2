@@ -7,9 +7,6 @@ sys.path.append('../qs-testes-truco-25-2')
 
 from truco.baralho import Baralho
 
-@pytest.fixture
-def baralho():
-    return Baralho()
 
 def test_criar_baralho(baralho):
     """Testa se o baralho é criado com naipes e valores válidos"""
@@ -36,7 +33,9 @@ def test_retirar_carta(baralho):
 
 def test_resetar(baralho):
     """Testa se o baralho fica zerado depois de resetar"""
-
+    baralho.vira = [2]
+    baralho.cartas = [2]
+    baralho.manilhas = [2]
     baralho.resetar()
     assert baralho.vira == []
     assert baralho.manilhas == []
