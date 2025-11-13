@@ -1,4 +1,4 @@
-"""Testes de métodos da classe BAralho"""
+"""Testes de métodos da classe Baralho"""
 
 import sys
 import random

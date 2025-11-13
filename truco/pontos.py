@@ -30,3 +30,7 @@ ENVIDO = {
     "5": 5,
     "4": 4
 }
+
+def test_mostrar_mao(bot_indices, carta):
+    bot_indices.mostrar_mao()
+    assert carta.exibir_carta.call_count == 3
