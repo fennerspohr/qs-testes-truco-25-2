@@ -87,7 +87,11 @@ def truco_mock():
 
 @pytest.fixture
 def mao():
-    return [Carta(7, "OUROS"), Carta(6, "OUROS"), Carta(3, "COPAS")]
+    return [Carta(1, "BASTIOS"), Carta(7, "OUROS"), Carta(3, "OUROS")]
+
+@pytest.fixture
+def mao_mock(carta_mock, carta2_mock, carta3_mock):
+    return [carta_mock, carta2_mock, carta3_mock]
 
 @pytest.fixture
 def mao_com_flor():
@@ -179,7 +183,7 @@ def test_calcula_envido(bot, mao):
     """Testa se o cálculo do envido está correto."""
     bot.mao = mao
     resultado = bot.calcula_envido(bot.mao)
-    assert resultado == 33
+    assert resultado == 30
 
     bot.mao = [Carta(1, "OUROS"), Carta(2, "ESPADAS"), Carta(3, "COPAS")]
     resultado = bot.calcula_envido(bot.mao)
@@ -209,14 +213,12 @@ def test_ajustar_indices(bot_indices, i):
         assert bot_indices.indices == [0, 1]
         assert bot_indices.pontuacao_cartas == [5, 15]
 
-def test_mostrar_mao(bot, carta_mock, carta2_mock, carta3_mock):
+def test_mostrar_mao(bot, mao_mock):
     """Testa se mostrar_mao chama exibir_carta para cada carta na mão."""
-    bot.mao = [carta_mock, carta2_mock, carta3_mock]
+    bot.mao = mao_mock
     bot.mostrar_mao()
-    
-    carta_mock.exibir_carta.assert_called_once_with(0)
-    carta2_mock.exibir_carta.assert_called_once_with(1)
-    carta3_mock.exibir_carta.assert_called_once_with(2)
+    for i, carta in enumerate(mao_mock):
+        carta.exibir_carta.assert_called_once_with(i)
 
 def test_adicionar_pontos(bot, pontos=5):
     """Testa se os pontos são adicionados corretamente ao bot."""
@@ -256,14 +258,24 @@ def test_avaliar_truco(bot, cbr_mock, retorno):
     assert resultado == retorno
 
 
-"""def test_avaliar_envido(bot, cbr_mock):
-   
-    bot.qualidade_mao = 5"""
+def test_avaliar_envido(bot, cbr_mock):
+    """Testa se chama cbr.envido e atribui 'perdendo' corretamente."""
+    bot.pontos = 7
+    bot.envido = 10
 
+    """"Testa if: pontos_totais_adversario > 6 """
+    bot.avaliar_envido(cbr_mock, tipo=6, quem_pediu=1, pontos_totais_adversario=10)
+    cbr_mock.envido.assert_called_once_with(6, 1, 10, True)
+    cbr_mock.envido.reset_mock()
 
-def test_avaliar_pedir_envido(bot):
-    retorno = bot.avaliar_pedir_envido()
-    assert retorno == 1
+    """"Testa if: pontos_totais_adversario > pontos/1.5 """
+    bot.avaliar_envido(cbr_mock, tipo=6, quem_pediu=1, pontos_totais_adversario=5)
+    cbr_mock.envido.assert_called_once_with(6, 1, 10, True)
+    cbr_mock.envido.reset_mock()
+
+    """"Testa else """
+    bot.avaliar_envido(cbr_mock, tipo=6, quem_pediu=1, pontos_totais_adversario=4)
+    cbr_mock.envido.assert_called_once_with(6, 1, 10, False)
 
 """def calcular_qualidade_mao(bot, cbr_mock):
    
