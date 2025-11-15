@@ -1,15 +1,9 @@
 """"Testa métodos da classe Dados"""
-import sys
 import pytest
 import pandas as pd
 import os
-sys.path.append('../qs-testes-truco-25-2')
 
-from truco.dados import Dados
 
-@pytest.fixture
-def dados():
-    return Dados()
 
 @pytest.fixture
 def colunas():

@@ -1,9 +1,6 @@
 """Testes de métodos da classe Jogador"""
 
-import sys
 import pytest
-sys.path.append('../qs-testes-truco-25-2')
-
 from truco.interface import Interface
 
 

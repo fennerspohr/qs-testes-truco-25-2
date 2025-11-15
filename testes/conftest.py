@@ -5,6 +5,7 @@ sys.path.append('../qs-testes-truco-25-2')
 from truco.carta import Carta
 from truco.jogador import Jogador
 from truco.baralho import Baralho
+from truco.dados import Dados
 
 @pytest.fixture
 def espadao():
@@ -33,3 +34,7 @@ def jogador():
 @pytest.fixture
 def baralho():
     return Baralho()
+
+@pytest.fixture
+def dados():
+    return Dados()
