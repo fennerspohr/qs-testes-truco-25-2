@@ -36,51 +36,51 @@ def test_verificar_ganhador(jogo, carta_alta_ouro, carta_baixa_copas, mocker):
     ganhador = jogo.verificar_ganhador(carta_alta_ouro, carta_baixa_copas, interface)
     method2_mock.assert_called_with(carta_alta_ouro, carta_baixa_copas)
 
-def test_adicionar_rodada(jogo, jogador, jogador2, espadao, carta_baixa_copas, bastiao):
+def test_adicionar_rodada(jogo, jogador, jogadorBot2, espadao, carta_baixa_copas, bastiao):
     """Testa se as rodadas são adicionadas corretamente aos jogadores"""
     # humano ganhador
     with patch.object(jogador, 'adicionar_rodada') as mock:
-        retorno = jogo.adicionar_rodada(jogador, jogador2, espadao, carta_baixa_copas, espadao)
+        retorno = jogo.adicionar_rodada(jogador, jogadorBot2, espadao, carta_baixa_copas, espadao)
     mock.assert_called_with()
     assert retorno == 1
     # bot ganhador
-    with patch.object(jogador2, 'adicionar_rodada') as mock:
-        retorno = jogo.adicionar_rodada(jogador, jogador2, espadao, carta_baixa_copas, carta_baixa_copas)
+    with patch.object(jogadorBot2, 'adicionar_rodada') as mock:
+        retorno = jogo.adicionar_rodada(jogador, jogadorBot2, espadao, carta_baixa_copas, carta_baixa_copas)
     mock.assert_called_with()
     assert retorno == 2
-    assert jogo.adicionar_rodada(jogador, jogador2, espadao, carta_baixa_copas, bastiao) == "Erro"
+    assert jogo.adicionar_rodada(jogador, jogadorBot2, espadao, carta_baixa_copas, bastiao) == "Erro"
 
-def test_quem_joga_primeiro(jogo, jogador, jogador2, espadao, bastiao):
+def test_quem_joga_primeiro(jogo, jogador, jogadorBot2, espadao, bastiao):
     """Testa se o primeiro a jogar é definido corretamente"""
-    jogo.quem_joga_primeiro(jogador, jogador2, espadao, bastiao, espadao)
+    jogo.quem_joga_primeiro(jogador, jogadorBot2, espadao, bastiao, espadao)
     assert jogador.primeiro == True
-    assert jogador2.primeiro == False
-    jogo.quem_joga_primeiro(jogador, jogador2, espadao, bastiao, bastiao)
+    assert jogadorBot2.primeiro == False
+    jogo.quem_joga_primeiro(jogador, jogadorBot2, espadao, bastiao, bastiao)
     assert jogador.primeiro == False
-    assert jogador2.primeiro == True
+    assert jogadorBot2.primeiro == True
 
-def test_quem_inicia_rodada(jogo, jogador, jogador2):
+def test_quem_inicia_rodada(jogo, jogador, jogadorBot2):
     """Testa se quem inicia a rodada é definido corretamente"""
     jogador.ultimo = True
-    jogo.quem_inicia_rodada(jogador, jogador2)
+    jogo.quem_inicia_rodada(jogador, jogadorBot2)
     assert jogador.ultimo == False
-    assert jogador2.ultimo == True
+    assert jogadorBot2.ultimo == True
     assert jogador.primeiro == True
-    assert jogador2.primeiro == False
-    jogo.quem_inicia_rodada(jogador, jogador2)
-    assert jogador2.ultimo == False
+    assert jogadorBot2.primeiro == False
+    jogo.quem_inicia_rodada(jogador, jogadorBot2)
+    assert jogadorBot2.ultimo == False
     assert jogador.primeiro == False
-    assert jogador2.primeiro == True
+    assert jogadorBot2.primeiro == True
     jogador.ultimo = None
     jogador.primeiro = None
-    jogador2.ultimo = None
-    jogador2.primeiro = None
+    jogadorBot2.ultimo = None
+    jogadorBot2.primeiro = None
     jogador.rodadas = 1
-    jogo.quem_inicia_rodada(jogador, jogador2)
+    jogo.quem_inicia_rodada(jogador, jogadorBot2)
     assert jogador.primeiro == None
-    assert jogador2.primeiro == None
+    assert jogadorBot2.primeiro == None
     assert jogador.ultimo == None
-    assert jogador2.ultimo == None
+    assert jogadorBot2.ultimo == None
 
 def test_verificar_carta_vencedora(jogo, espadao, bastiao, carta_alta_ouro, carta_baixa_copas, carta_baixa_ouro):
     """Testa se a verificação de carta vencedora é feita corretamente"""
@@ -95,8 +95,8 @@ def test_verificar_carta_vencedora(jogo, espadao, bastiao, carta_alta_ouro, cart
     # cartas normais iguais
     assert jogo.verificar_carta_vencedora(carta_baixa_ouro, carta_baixa_copas) == carta_baixa_copas
 
-def test_jogador_fugiu(jogo, jogador, jogador2):
+def test_jogador_fugiu(jogo, jogador, jogadorBot2):
     """Testa se a ordem de jogadas é resetada corretamente quando um jogador foge"""
-    jogo.jogador_fugiu(jogador, jogador, jogador2, 0)
+    jogo.jogador_fugiu(jogador, jogador, jogadorBot2, 0)
     assert jogador.primeiro == True
-    assert jogador2.primeiro == False
+    assert jogadorBot2.primeiro == False
