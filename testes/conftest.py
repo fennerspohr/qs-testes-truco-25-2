@@ -3,13 +3,12 @@ import pytest
 sys.path.append('../qs-testes-truco-25-2')
 
 from truco.carta import Carta
+from truco.interface import Interface
 from truco.jogador import Jogador
 from truco.baralho import Baralho
 from truco.dados import Dados
 from truco.bot import Bot
 from truco.cbr import Cbr
-from truco.flor import Flor
-from unittest.mock import MagicMock
 from truco.flor import Flor
 from unittest.mock import MagicMock
 from truco.truco import Truco
@@ -78,6 +77,10 @@ def flor():
 @pytest.fixture
 def interface_mock():
     return MagicMock()
+
+@pytest.fixture
+def interface():
+    return Interface()
 
 @pytest.fixture
 def truco():
