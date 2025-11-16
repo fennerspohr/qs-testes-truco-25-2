@@ -10,10 +10,17 @@ from truco.bot import Bot
 from truco.cbr import Cbr
 from truco.flor import Flor
 from unittest.mock import MagicMock
+from truco.flor import Flor
+from unittest.mock import MagicMock
+from truco.truco import Truco
 
 @pytest.fixture
 def cbr():
     return Cbr()
+
+@pytest.fixture
+def cbr_mock():
+    return MagicMock(spec=Cbr)
 
 @pytest.fixture
 def espadao():
@@ -45,8 +52,12 @@ def jogador2():
     return Jogador("testes 2")
 
 @pytest.fixture
-def jogadorBot2():
+def jogadorBot2_bot():
     return Bot("Bot")
+
+@pytest.fixture
+def jogador2_mock(pontos=0):
+    return MagicMock(spec=Bot, pontos=pontos)
 
 @pytest.fixture
 def baralho():
@@ -57,9 +68,19 @@ def dados():
     return Dados()
 
 @pytest.fixture
+def dados_mock():
+    return MagicMock(spec=Dados)
+
+@pytest.fixture
+
+@pytest.fixture
 def flor():
     return Flor()
 
 @pytest.fixture
 def interface_mock():
     return MagicMock()
+
+@pytest.fixture
+def truco():
+    return Truco()
