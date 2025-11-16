@@ -2,6 +2,7 @@
 import sys
 import random
 import pytest
+import statistics
 from unittest.mock import MagicMock
 sys.path.append('../qs-testes-truco-25-2')
 from truco.baralho import Baralho
@@ -277,9 +278,10 @@ def test_avaliar_envido(bot, cbr_mock):
     bot.avaliar_envido(cbr_mock, tipo=6, quem_pediu=1, pontos_totais_adversario=4)
     cbr_mock.envido.assert_called_once_with(6, 1, 10, False)
 
-"""def calcular_qualidade_mao(bot, cbr_mock):
-   
-    bot.qualidade_mao = 5"""
+def test_calcular_qualidade_mao(bot, cbr_mock):
+    bot.calcular_qualidade_mao([24, 6, 4], ['Alta', 'Media', 'Baixa'])
+    expected = statistics.harmonic_mean([24, 6, 4])
+    assert bot.qualidade_mao == expected
 
 def test_retorna_pontos_totais(bot, pontos):
     """Testa se o retorno dos pontos totais está correto."""

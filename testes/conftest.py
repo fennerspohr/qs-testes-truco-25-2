@@ -72,8 +72,6 @@ def dados_mock():
     return MagicMock(spec=Dados)
 
 @pytest.fixture
-
-@pytest.fixture
 def flor():
     return Flor()
 
