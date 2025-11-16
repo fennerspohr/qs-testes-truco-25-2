@@ -20,6 +20,7 @@ def test_verificar_carta_alta(espadao, bastiao, carta_alta_ouro, carta_baixa_cop
 
     # Duas manilhas
     assert espadao.verificar_carta_alta(espadao, bastiao) == espadao
+    assert espadao.verificar_carta_alta(espadao, espadao) == espadao
     # Uma manilha e uma carta normal
     assert bastiao.verificar_carta_alta(carta_alta_ouro, bastiao) == bastiao
     # Duas cartas normais de valores diferentes
@@ -32,6 +33,7 @@ def test_verificar_carta_baixa(espadao, bastiao, carta_alta_ouro, carta_baixa_co
 
     # Duas manilhas
     assert espadao.verificar_carta_baixa(espadao, bastiao) == bastiao
+    assert espadao.verificar_carta_baixa(espadao, espadao) == espadao
     # Uma manilha e uma carta normal
     assert bastiao.verificar_carta_baixa(bastiao, carta_alta_ouro) == carta_alta_ouro
     # Duas cartas normais de valores diferentes
