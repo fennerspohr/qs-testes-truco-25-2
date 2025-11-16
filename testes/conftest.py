@@ -5,6 +5,7 @@ sys.path.append('../qs-testes-truco-25-2')
 from truco.carta import Carta
 from truco.jogador import Jogador
 from truco.baralho import Baralho
+<<<<<<< HEAD
 from truco.dados import Dados
 from truco.bot import Bot
 from truco.cbr import Cbr
@@ -12,6 +13,10 @@ from truco.cbr import Cbr
 @pytest.fixture
 def cbr():
     return Cbr()
+=======
+from truco.flor import Flor
+from unittest.mock import MagicMock
+>>>>>>> 2fd8793 ([Testes] test_flor.py)
 
 @pytest.fixture
 def espadao():
@@ -37,6 +42,11 @@ def carta_baixa_copas():
 def jogador():
     return Jogador("Testes")
 
+
+@pytest.fixture
+def jogador2():
+    return Jogador("testes 2")
+
 @pytest.fixture
 def jogador2():
     return Bot("Bot")
@@ -46,5 +56,14 @@ def baralho():
     return Baralho()
 
 @pytest.fixture
+<<<<<<< HEAD
 def dados():
     return Dados()
+=======
+def flor():
+    return Flor()
+
+@pytest.fixture
+def interface_mock():
+    return MagicMock()
+>>>>>>> 2fd8793 ([Testes] test_flor.py)
