@@ -6,6 +6,12 @@ from truco.carta import Carta
 from truco.jogador import Jogador
 from truco.baralho import Baralho
 from truco.dados import Dados
+from truco.bot import Bot
+from truco.cbr import Cbr
+
+@pytest.fixture
+def cbr():
+    return Cbr()
 
 @pytest.fixture
 def espadao():
@@ -30,6 +36,10 @@ def carta_baixa_copas():
 @pytest.fixture
 def jogador():
     return Jogador("Testes")
+
+@pytest.fixture
+def jogador2():
+    return Bot("Bot")
 
 @pytest.fixture
 def baralho():

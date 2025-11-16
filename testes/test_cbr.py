@@ -4,11 +4,6 @@ from sklearn.neighbors import NearestNeighbors
 
 sys.path.append('../qs-testes-truco-25-2')
 
-from truco.cbr import Cbr
-
-@pytest.fixture
-def cbr():
-    return Cbr()
 
 def test_carregar_dataset(cbr):
     """Testa se o dataset está sendo carregado corretamente"""
