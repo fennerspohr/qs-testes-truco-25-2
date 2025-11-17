@@ -51,7 +51,7 @@ def jogador2():
     return Jogador("testes 2")
 
 @pytest.fixture
-def jogadorBot2_bot():
+def jogadorBot2():
     return Bot("Bot")
 
 @pytest.fixture
